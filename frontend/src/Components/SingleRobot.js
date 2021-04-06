@@ -53,7 +53,7 @@ const SingleRobot = ({ token }) => {
                         <ReactPlayer url="https://www.youtube.com/watch?v=JLmOteqmDYc" playing={false} width='100%' height='100%' controls={true} />
                     </div>
                     <div className="card col-md-4 mt-5 mx-auto text-white bg-dark" style={{ width: '30rem' }}>
-                        <Carousel autoPlay={true} infiniteLoop stopOnHover={true}>
+                        <Carousel autoPlay={true} infiniteLoop stopOnHover={true} showIndicators={false}>
                             {robot.img.map((url, index) => (
                                 <div key={index}>
                                     <img src={url} className="card-img-top d-block" alt="..." />
@@ -61,18 +61,18 @@ const SingleRobot = ({ token }) => {
                             ))}
                         </Carousel>
                         <div className="card-body">
-                            <div>
-                                <h5 className="card-title">{robot.name}
-                                    {isItFaved ? (
-                                        <button className='btn' style={{ color: "yellow" }} onClick={handleFavorite}><FontAwesomeIcon icon={faStar} /> Favorite</button>
+                            <h5 className="card-title">{robot.name}
+                                {isItFaved ? (
+                                    <button className='btn' style={{ color: "yellow" }} onClick={handleFavorite}><FontAwesomeIcon icon={faStar} /> Favorite</button>
 
-                                    ) :
-                                        <button className='btn' style={{ color: "yellow" }} onClick={handleFavorite}> <FontAwesomeIcon icon={farStar} /> Add to favorite!</button>
-                                    }
-                                    {isItModerator ? <EditModal {...robot} /> : <div></div>}
-                                </h5>
-                            </div>
+                                ) :
+                                    <button className='btn' style={{ color: "yellow" }} onClick={handleFavorite}> <FontAwesomeIcon icon={farStar} /> Add to favorite!</button>
+                                }
+                            </h5>
                             <p className="card-text">{robot.description}</p>
+                        </div>
+                        <div className="mb-3 mx-auto">
+                            {isItModerator ? <EditModal {...robot} /> : <div></div>}
                         </div>
                     </div>
                 </div >

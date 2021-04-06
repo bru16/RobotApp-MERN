@@ -7,13 +7,13 @@ import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
-const EditModal = ({ name, _id }) => {
+const EditModal = ({ name, _id, description }) => {
     const history = useHistory();
     const user = useAuth();
     const customStyles = {
         overlay:
         {
-            backgroundColor: 'rgba(107, 37, 37, 0.75)'
+            backgroundColor: null
         },
         content: {
             position: 'absolute',
@@ -23,12 +23,12 @@ const EditModal = ({ name, _id }) => {
             bottom: '0',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            background: '#A9A9A9'
+            background: '#544848'
         }
     };
     const [modalIsOpen, setIsOpen] = useState(false);
     const [robotName, setName] = useState('');
-    const [description, setDescription] = useState('');
+    const [robotDescription, setRobotDescription] = useState('');
 
     function openModal() {
         setIsOpen(true);
@@ -42,12 +42,17 @@ const EditModal = ({ name, _id }) => {
     const submitEdit = e => {
         console.log(_id)
         e.preventDefault();
-        user.editRobot({ robotName, description, _id })
+        if (!robotName.replace(/\s/g, '').length || !robotDescription.replace(/\s/g, '').length) {
+            toast.error('Name and Description cannot be blank');
+            return;
+        }
+        user.editRobot({ robotName, robotDescription, _id })
             .then(() => {
                 user.getFavs(); // update favorite robots array in user. (context)
                 history.push('/home')
                 toast.info("Edited Successfully!")
-            });
+            })
+            .catch(() => toast.error('An error has ocurred'));
     }
 
     return (
@@ -70,8 +75,8 @@ const EditModal = ({ name, _id }) => {
                             <input type="text" className="form-control" placeholder="Please fill in the information" onChange={e => setName(e.target.value)} />
                         </div>
                         <div className="mt-4 form-group">
-                            <h2>Description</h2>
-                            <textarea class="form-control" placeholder="Please fill in the information" onChange={e => setDescription(e.target.value)} ></textarea>
+                            <h2>robotDescription</h2>
+                            <textarea class="form-control" placeholder="Please fill in the information" onChange={e => setRobotDescription(e.target.value)} ></textarea>
                         </div>
                         <div className="modal-footer">
                             <button type="submit" className="btn btn-dark btn-outline-secondary btn-space"><FontAwesomeIcon icon={faPaperPlane} /> Submit</button>

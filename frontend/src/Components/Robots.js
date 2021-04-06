@@ -11,7 +11,7 @@ const Robots = ({ robot }) => {
                 <div key={r._id}>
                     <div className="d-flex col">
                         <div className="card mx-auto text-white bg-dark" style={{ width: '30rem' }}>
-                            <Carousel autoPlay={true} infiniteLoop stopOnHover={true}>
+                            <Carousel autoPlay={true} infiniteLoop stopOnHover={true} showIndicators={false}>
                                 {r.img.map((url, index) => (
                                     <img key={index} src={url} className="card-img-top d-block" alt="..." />
                                 ))}

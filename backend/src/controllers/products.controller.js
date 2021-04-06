@@ -18,9 +18,8 @@ export const getProductById = async (req, res) => {
 }
 
 export const updateProductById = async (req, res) => {
-    console.log(req.params.productId);
-    const { robotName, description } = req.body;
-    const name = robotName;
+    const name = req.body.robotName;
+    const description = req.body.robotDescription;
     const updatedRobot = await Product.findByIdAndUpdate(req.params.productId, { name, description }, { new: true });
     res.status(204).json(updatedRobot);
 }

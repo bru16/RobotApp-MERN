@@ -95,8 +95,8 @@ function useProvideAuth() {
         )
     }
 
-    const editRobot = ({ robotName, description, _id }) => {
-        return axios.put(`${API_URL}products/${_id}`, { robotName, description, _id }, {
+    const editRobot = ({ robotName, robotDescription, _id }) => {
+        return axios.put(`${API_URL}products/${_id}`, { robotName, robotDescription, _id }, {
             headers: {
                 "x-access-token": token
             }
