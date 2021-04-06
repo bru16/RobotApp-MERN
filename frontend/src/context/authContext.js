@@ -8,9 +8,10 @@ function useProvideAuth() {
     const [user, setUser] = useState(null);
     const [favs, setFavs] = useState([]);
     const [token, setToken] = useState(null);
+    const [timeToLogOut, setTimeToLogOut] = useState(null);
 
     useEffect(() => {
-        const loggedInUser = JSON.parse(localStorage.getItem('user'));
+        const loggedInUser = getCurrentUser()
         if (loggedInUser) {
             const foundUser = loggedInUser;
             setUser(foundUser); // Persistent data
@@ -31,7 +32,8 @@ function useProvideAuth() {
         }).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data)); // save user and its token
             setUser(res.data);
-            console.log('User set in localStorage');
+            const miliseconds = 7200000;    //2 hours
+            autoLogout(miliseconds);
         }).catch(() => {
             return false
         })
@@ -48,9 +50,15 @@ function useProvideAuth() {
 
     const logout = () => {
         localStorage.removeItem("user");
+        localStorage.clear();
+        clearTimeout(timeToLogOut);
         setUser(null);
         setToken(null);
     };
+
+    const autoLogout = (miliseconds) => {
+        setTimeToLogOut(setTimeout(() => { logout() }, miliseconds));
+    }
 
     const getCurrentUser = () => {
         return JSON.parse(localStorage.getItem("user"));

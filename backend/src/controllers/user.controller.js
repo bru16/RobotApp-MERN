@@ -1,6 +1,3 @@
-import Product from "../models/Product";
-import User from "../models/User";
-
 export const getFavorite = async (req, res) => {
     const user = await res.locals.user.execPopulate("favoriteRobots");
     const robots = user.favoriteRobots;;
