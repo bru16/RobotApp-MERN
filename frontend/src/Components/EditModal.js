@@ -75,7 +75,7 @@ const EditModal = ({ name, _id, description }) => {
                             <input type="text" className="form-control" placeholder="Please fill in the information" onChange={e => setName(e.target.value)} />
                         </div>
                         <div className="mt-4 form-group">
-                            <h2>robotDescription</h2>
+                            <h2>Description</h2>
                             <textarea class="form-control" placeholder="Please fill in the information" onChange={e => setRobotDescription(e.target.value)} ></textarea>
                         </div>
                         <div className="modal-footer">

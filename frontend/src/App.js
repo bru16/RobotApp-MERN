@@ -15,6 +15,13 @@ function App() {
   const auth = useAuth(); //useContext
   toast.configure() // for notifications
   console.log(auth.user);
+  useEffect(() => {
+    const expiryDate = localStorage.getItem('expiryDate');
+    if (expiryDate && (Date.now() >= expiryDate)) {
+      auth.logout();
+    }
+  })
+
   return (
     <div>
       <Router>

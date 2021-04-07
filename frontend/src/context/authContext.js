@@ -32,8 +32,9 @@ function useProvideAuth() {
         }).then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data)); // save user and its token
             setUser(res.data);
-            const miliseconds = 7200000;    //2 hours
-            autoLogout(miliseconds);
+            const expiryDate = Date.now() + 7200000; //2 hrs
+            localStorage.setItem('expiryDate', JSON.stringify(expiryDate));
+            autoLogout(7200000);
         }).catch(() => {
             return false
         })
@@ -49,15 +50,16 @@ function useProvideAuth() {
     };
 
     const logout = () => {
-        localStorage.removeItem("user");
         localStorage.clear();
         clearTimeout(timeToLogOut);
         setUser(null);
         setToken(null);
+        setTimeToLogOut(null);
     };
 
     const autoLogout = (miliseconds) => {
-        setTimeToLogOut(setTimeout(() => { logout() }, miliseconds));
+        const time = setTimeout(() => { logout() }, miliseconds);   // id of the timeout
+        setTimeToLogOut(time);
     }
 
     const getCurrentUser = () => {
