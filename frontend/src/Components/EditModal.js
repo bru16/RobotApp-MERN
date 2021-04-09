@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
-const EditModal = ({ name, _id, description }) => {
+const EditModal = ({ name, _id }) => {
     const history = useHistory();
     const user = useAuth();
     const customStyles = {
@@ -76,7 +76,7 @@ const EditModal = ({ name, _id, description }) => {
                         </div>
                         <div className="mt-4 form-group">
                             <h2>Description</h2>
-                            <textarea class="form-control" placeholder="Please fill in the information" onChange={e => setRobotDescription(e.target.value)} ></textarea>
+                            <textarea className="form-control" placeholder="Please fill in the information" onChange={e => setRobotDescription(e.target.value)} ></textarea>
                         </div>
                         <div className="modal-footer">
                             <button type="submit" className="btn btn-dark btn-outline-secondary btn-space"><FontAwesomeIcon icon={faPaperPlane} /> Submit</button>

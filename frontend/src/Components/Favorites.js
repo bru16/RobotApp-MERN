@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const Favorites = () => {
+
     const user = useAuth();
     const handleFavorite = (id, robot, faved) => {
         user.handleFavorite(id, robot, faved);

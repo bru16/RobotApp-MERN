@@ -100,9 +100,21 @@ function useProvideAuth() {
     const editRobot = ({ robotName, robotDescription, _id }) => {
         return axios.put(`${API_URL}products/${_id}`, { robotName, robotDescription, _id }, {
             headers: {
-                "x-access-token": token
-            }
+                "x-access-token": token,
+                'content-type': 'multipart/form-data'
+            },
         }).catch(err => console.log(err));
+    }
+
+    const createRobot = (data) => {
+        console.log(data)
+        axios.post(`${API_URL}products/new`, data, {
+            headers: {
+                "x-access-token": token
+            },
+        })
+            .then((res) => console.log(res))
+            .catch(err => console.log(err));
     }
 
     // Return the user object and auth methods
@@ -117,7 +129,8 @@ function useProvideAuth() {
         getCurrentUser,
         handleFavorite,
         editRobot,
-        getFavs
+        getFavs,
+        createRobot
     };
 }
 
