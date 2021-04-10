@@ -1,10 +1,20 @@
-import Product from '../models/Product' // importo Esquema del modelo de datos de mongo.
+import Product from '../models/Product'
 
 export const createProduct = async (req, res) => {
-    const { name, img, description } = req.body;
-    const newProduct = new Product({ name, img, description });
-    const productSaved = await newProduct.save();
-    res.status(201).json(productSaved);
+    console.log(req.files);
+    const img = req.files.map(image => { return `http://localhost:4000/${image.path}` });
+    const name = req.body.robot[0];
+    const description = req.body.robot[1];
+    console.log(name, description, img);
+
+    const robot = new Product({
+        name,
+        description,
+        img
+    });
+    const robotSaved = await robot.save();
+    console.log(robotSaved);
+    res.status(200).json({ robotSaved });
 }
 
 export const getProducts = async (req, res) => {

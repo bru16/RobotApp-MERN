@@ -101,13 +101,11 @@ function useProvideAuth() {
         return axios.put(`${API_URL}products/${_id}`, { robotName, robotDescription, _id }, {
             headers: {
                 "x-access-token": token,
-                'content-type': 'multipart/form-data'
             },
         }).catch(err => console.log(err));
     }
 
-    const createRobot = (data) => {
-        console.log(data)
+    async function createRobot(data) {
         axios.post(`${API_URL}products/new`, data, {
             headers: {
                 "x-access-token": token

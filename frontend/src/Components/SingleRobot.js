@@ -53,11 +53,14 @@ const SingleRobot = ({ token }) => {
                         <ReactPlayer url="https://www.youtube.com/watch?v=JLmOteqmDYc" playing={false} width='100%' height='100%' controls={true} />
                     </div>
                     <div className="card col-md-4 mt-5 mx-auto text-white bg-dark" style={{ width: '30rem' }}>
-                        <Carousel autoPlay={true} infiniteLoop stopOnHover={true} showIndicators={false}>
+                        <Carousel
+                            autoPlay
+                            infiniteLoop
+                            renderThumbs={() => { return robot.img.map((url, index) => { return <img key={index} src={url} /> }) }}
+                            stopOnHover
+                            showIndicators={false}>
                             {robot.img.map((url, index) => (
-                                <div key={index}>
-                                    <img src={url} className="card-img-top d-block" alt="..." />
-                                </div>
+                                <img key={index} src={url} className="photo card-img-top d-block" alt="..." />
                             ))}
                         </Carousel>
                         <div className="card-body">

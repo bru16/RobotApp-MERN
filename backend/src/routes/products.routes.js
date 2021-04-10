@@ -1,11 +1,12 @@
 import { Router } from 'express'
 import * as productsCtrl from '../controllers/products.controller'
-import { authJwt } from '../middlewares'
+import { authJwt, upload } from '../middlewares'
+
 const router = Router();
 
 router.get('/', [authJwt.verifyToken], productsCtrl.getProducts);
 
-router.post('/', [authJwt.verifyToken, authJwt.isAdmin], productsCtrl.createProduct);   //antes de crear el product Verifico mediante middlewares si 
+router.post('/new', [authJwt.verifyToken, authJwt.isAdmin, upload.array('file')], productsCtrl.createProduct);   //antes de crear el product Verifico mediante middlewares si 
 //existe un token y si el user es moderator
 router.get('/:productId', [authJwt.verifyToken], productsCtrl.getProductById);
 

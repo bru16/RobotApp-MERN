@@ -1,7 +1,7 @@
 import { Router } from 'express'
 const router = Router();
 import * as userCtrl from '../controllers/user.controller'
-import { authJwt, verifySignUp } from '../middlewares';
+import { authJwt } from '../middlewares';
 
 
 router.get('/', [authJwt.verifyToken], userCtrl.getFavorite);

@@ -10,7 +10,7 @@ const NewRobot = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         if (!name.replace(/\s/g, '').length || !description.replace(/\s/g, '').length) {
             toast.error('Name and Description cannot be blank');
@@ -20,8 +20,10 @@ const NewRobot = () => {
         for (var x = 0; x < image.length; x++) {
             data.append('file', image[x])
         }
+        data.append('robot', name);
+        data.append('robot', description);
         console.log(name, description, data)
-        auth.createRobot(data);
+        auth.createRobot(data).then(() => console.log('sent correctly'));
     }
 
     const handleFiles = e => {

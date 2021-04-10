@@ -6,14 +6,19 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Robots = ({ robot }) => {
     return (
-        <div className="mt-4 container-fluid row row-cols-1 row-cols-md-3 g-4">
+        <div className="container-fluid row row-cols-3 row-cols-md-3 g-4 mt-4 ">
             {robot.map((r) => (
                 <div key={r._id}>
-                    <div className="d-flex col">
+                    <div className="d-flex col ">
                         <div className="card mx-auto text-white bg-dark" style={{ width: '30rem' }}>
-                            <Carousel autoPlay={true} infiniteLoop stopOnHover={true} showIndicators={false}>
+                            <Carousel
+                                autoPlay
+                                renderThumbs={() => { return r.img.map((url, index) => { return <img key={index} src={url} /> }) }}
+                                infiniteLoop
+                                stopOnHover
+                                showIndicators={false}>
                                 {r.img.map((url, index) => (
-                                    <img key={index} src={url} className="card-img-top d-block" alt="..." />
+                                    <img key={index} src={url} className="photo card-img-top d-block" alt="..." />
                                 ))}
                             </Carousel>
                             <div className="card-body">
