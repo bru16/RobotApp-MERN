@@ -5,12 +5,14 @@ export const createProduct = async (req, res) => {
     const img = req.files.map(image => { return `http://localhost:4000/${image.path}` });   //change
     const name = req.body.robot[0];
     const description = req.body.robot[1];
-    console.log(name, description, img);
+    const video = req.body.robot[2];
+    console.log(name, description, img,video);
 
     const robot = new Product({
         name,
         description,
-        img
+        img,
+        video
     });
     const robotSaved = await robot.save();
     console.log(robotSaved);
