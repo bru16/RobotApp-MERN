@@ -50,7 +50,7 @@ const SingleRobot = ({ token }) => {
             <div className='container-fluid'>
                 <div className='row'>
                     <div className="col-sm-8 mx-auto mt-5">
-                        <ReactPlayer url="https://www.youtube.com/watch?v=JLmOteqmDYc" playing={false} width='100%' height='100%' controls={true} />
+                        <ReactPlayer url={robot.video} playing={false} width='100%' height='100%' controls={true} />
                     </div>
                     <div className="card col-md-4 mt-5 mx-auto text-white bg-dark" style={{ width: '30rem' }}>
                         <Carousel

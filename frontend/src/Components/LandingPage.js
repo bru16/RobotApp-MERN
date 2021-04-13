@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const LandingPage = () => {;
+const LandingPage = ({ user }) => {
     return (
         <div>
             <div className="jumbotron jumbotron-fluid">
@@ -10,15 +10,14 @@ const LandingPage = () => {;
                     <hr className="my-2" />
                     <p>App built with MERN stack</p>
                     <p className="lead">
-                        <div className='btn-rightEnd'>
+                        {!user ? <div className='btn-rightEnd'>
                             <Link to="/login"><button type="button" className="btn btn-dark btn-outline-secondary btn-space" >Log In</button></Link>
                             <Link to="/signup"><button type="button" className="btn btn-dark btn-outline-secondary" >Sign Up</button></Link>
-                        </div>
+                        </div> : <div></div>}
                     </p>
                 </div>
             </div>
         </div>
-
     );
 }
 

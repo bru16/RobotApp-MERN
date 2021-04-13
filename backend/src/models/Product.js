@@ -3,9 +3,10 @@ import { Schema, model } from 'mongoose'
 const productSchema = new Schema({
     name: String,
     description: String,
-    img: Array
+    img: Array,
+    video: String
 }, {
-    timestamps: true,
+    timestamps: false,
     versionKey: false
 })
 

@@ -28,7 +28,7 @@ function App() {
       <Router>
         {auth.user ? <Navbar /> : <Redirect to="/" />}
         <Switch>
-          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/" component={() => <LandingPage user={auth.user} />} />
           <Route path="/login" component={() => (auth.user ? <Redirect to="/home" /> : <LoginForm />)} />
           <Route path="/signup" component={() => (auth.user ? <Redirect to="/home" /> : <SignupForm />)} />
           <Route path="/home" component={() => (auth.user ? <Home token={auth.user.token} /> : <Redirect to="/login" />)} />
