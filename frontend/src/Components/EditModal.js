@@ -23,7 +23,7 @@ const EditModal = ({ name, _id }) => {
             bottom: '0',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            background: '#544848'
+            background: '#363434'
         }
     };
     const [modalIsOpen, setIsOpen] = useState(false);
