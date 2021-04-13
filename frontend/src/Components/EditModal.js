@@ -52,7 +52,7 @@ const EditModal = ({ name, _id }) => {
                 history.push('/home')
                 toast.info("Edited Successfully!")
             })
-            .catch(() => toast.error('An error has ocurred'));
+            .catch(() => toast.error('An error has occurred'));
     }
 
     return (

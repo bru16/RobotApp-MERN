@@ -105,14 +105,12 @@ function useProvideAuth() {
         }).catch(err => console.log(err));
     }
 
-    async function createRobot(data) {
-        axios.post(`${API_URL}products/new`, data, {
+    const createRobot = async (data) => {
+        return axios.post(`${API_URL}products/new`, data, {
             headers: {
                 "x-access-token": token
             },
-        })
-            .then((res) => console.log(res))
-            .catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     // Return the user object and auth methods

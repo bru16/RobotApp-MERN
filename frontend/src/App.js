@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './Components/Navbar'
-import { BrowserRouter as Router, Redirect, Route, Switch, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Home from './Components/Home'
 import LandingPage from './Components/LandingPage';
 import LoginForm from './Components/auth/LoginForm';

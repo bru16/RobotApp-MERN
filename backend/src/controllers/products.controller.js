@@ -2,7 +2,7 @@ import Product from '../models/Product'
 
 export const createProduct = async (req, res) => {
     console.log(req.files);
-    const img = req.files.map(image => { return `http://localhost:4000/${image.path}` });
+    const img = req.files.map(image => { return `http://localhost:4000/${image.path}` });   //change
     const name = req.body.robot[0];
     const description = req.body.robot[1];
     console.log(name, description, img);
