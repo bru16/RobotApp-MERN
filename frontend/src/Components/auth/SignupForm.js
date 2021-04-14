@@ -18,12 +18,10 @@ const SignupForm = () => {
         if (values.role === 'admin') roles.push('moderator', 'admin');
 
         return auth.register(values.username, values.email, values.password, roles)
-            .then((res) => {
+            .then(() => {
                 toast.success("Signed Up Successfully!");
-                console.log(res);
                 history.push("/login");
-            }).catch((err) => {
-                console.log(err);
+            }).catch(() => {
                 toast.error("User already exists, try again.");
             })
     }
@@ -58,7 +56,6 @@ const SignupForm = () => {
                 <Link to="/"><button type="button" className="btn btn-dark btn-outline-secondary" ><FontAwesomeIcon icon={faReply} /> Go back</button></Link>
             </div>
             <div className="col-md-2 mx-auto mt-5 container">
-
                 <Formik initialValues={{
                     username: '',
                     password: '',
@@ -100,14 +97,9 @@ const SignupForm = () => {
                                     <button type="submit" className="btn btn-dark btn-outline-secondary btn-space" >Submit</button>
                                 </div>
                             </div>
-
                         </Form>
                     )}
-
                 </Formik>
-
-
-
             </div>
         </div>
     )

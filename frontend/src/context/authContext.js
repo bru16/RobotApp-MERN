@@ -7,7 +7,6 @@ const axios = require('axios').default;
 function useProvideAuth() {
     const [user, setUser] = useState(null);
     const [favs, setFavs] = useState([]);
-    const [token, setToken] = useState(null);
     const [timeToLogOut, setTimeToLogOut] = useState(null);
 
     useEffect(() => {
@@ -21,7 +20,6 @@ function useProvideAuth() {
     useEffect(() => {
         if (user) {
             getFavs();
-            setToken(user.token);
         }
     }, [user])
 
@@ -53,7 +51,6 @@ function useProvideAuth() {
         localStorage.clear();
         clearTimeout(timeToLogOut);
         setUser(null);
-        setToken(null);
         setTimeToLogOut(null);
     };
 
@@ -80,7 +77,7 @@ function useProvideAuth() {
         if (isFaved === true) {
             axios.delete(`${API_URL}user/${id}`, {
                 headers: {
-                    "x-access-token": token
+                    "x-access-token": user.token
                 }
             }).then((res) => {
                 setFavs(res.data.favoriteRobots);
@@ -89,7 +86,7 @@ function useProvideAuth() {
         else (
             axios.put(`${API_URL}user/${id}`, { robot }, {
                 headers: {
-                    "x-access-token": token
+                    "x-access-token": user.token
                 }
             }).then((res) => {
                 setFavs(res.data.favoriteRobots);
@@ -100,7 +97,7 @@ function useProvideAuth() {
     const editRobot = ({ robotName, robotDescription, _id }) => {
         return axios.put(`${API_URL}products/${_id}`, { robotName, robotDescription, _id }, {
             headers: {
-                "x-access-token": token,
+                "x-access-token": user.token,
             },
         }).catch(err => console.log(err));
     }
@@ -108,7 +105,7 @@ function useProvideAuth() {
     const createRobot = async (data) => {
         return axios.post(`${API_URL}products/new`, data, {
             headers: {
-                "x-access-token": token
+                "x-access-token": user.token
             },
         }).catch(err => console.log(err));
     }

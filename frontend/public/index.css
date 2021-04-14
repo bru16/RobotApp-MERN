@@ -81,4 +81,8 @@ h3{
 .photo {
     height: 478px;
     width: 478px;
-  }
+}
+
+h2{ 
+    color: grey;
+}

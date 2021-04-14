@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Navbar from './Components/Navbar'
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Home from './Components/Home'
@@ -15,7 +15,6 @@ import NewRobot from './Components/NewRobot'
 function App() {
   const auth = useAuth(); //useContext
   toast.configure() // for notifications
-  console.log(auth.user);
   useEffect(() => {
     const expiryDate = localStorage.getItem('expiryDate');
     if (expiryDate && (Date.now() >= expiryDate)) {

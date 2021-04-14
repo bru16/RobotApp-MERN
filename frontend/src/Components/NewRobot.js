@@ -31,7 +31,6 @@ const NewRobot = () => {
         data.append('robot', video);
         auth.createRobot(data)
             .then(() => {
-                console.log('created')
                 toast.info('Robot created successfully');
                 history.push('/home');
             })

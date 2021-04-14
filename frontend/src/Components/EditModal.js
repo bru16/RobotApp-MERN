@@ -23,24 +23,14 @@ const EditModal = ({ name, _id }) => {
             bottom: '0',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            background: '#363434'
+            background: '#111013'
         }
     };
     const [modalIsOpen, setIsOpen] = useState(false);
     const [robotName, setName] = useState('');
     const [robotDescription, setRobotDescription] = useState('');
 
-    function openModal() {
-        setIsOpen(true);
-    }
-
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-
     const submitEdit = e => {
-        console.log(_id)
         e.preventDefault();
         if (!robotName.replace(/\s/g, '').length || !robotDescription.replace(/\s/g, '').length) {
             toast.error('Name and Description cannot be blank');
@@ -57,16 +47,16 @@ const EditModal = ({ name, _id }) => {
 
     return (
         <div>
-            <button className="btn" onClick={openModal} style={{ color: 'lightskyblue' }}><FontAwesomeIcon icon={faEdit} />  EDIT</button>
+            <button className="btn" onClick={() => setIsOpen(true)} style={{ color: 'lightskyblue' }}><FontAwesomeIcon icon={faEdit} />  EDIT</button>
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
+                onRequestClose={() => setIsOpen(false)}
                 style={customStyles}
                 contentLabel="Edit Modal"
             >
                 <div className="modal-header">
                     <h2>EDIT {name}</h2>
-                    <button className="btn" style={{ color: 'snow' }} onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></button>
+                    <button className="btn" style={{ color: 'snow' }} onClick={() => setIsOpen(false)}><FontAwesomeIcon icon={faWindowClose} /></button>
                 </div>
                 <div>
                     <form onSubmit={submitEdit}>
@@ -84,7 +74,7 @@ const EditModal = ({ name, _id }) => {
                     </form>
                 </div>
             </Modal>
-        </div>
+        </div >
     )
 }
 
