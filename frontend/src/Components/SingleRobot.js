@@ -85,8 +85,8 @@ const SingleRobot = ({ token }) => {
                             </h5>
                             <p className="card-text">{robot.description}</p>
                         </div>
-                        <div className="mb-3 mx-auto">
-                            {isItModerator ? <div>
+                        <div className="mx-auto">
+                            {isItModerator ? <div className="d-flex">
                                 <EditModal {...robot} />
                                 <button className="btn" onClick={handleDelete} style={{ color: "darkgoldenrod" }}><FontAwesomeIcon icon={faBackspace} />  DELETE</button>
                             </div> : <div></div>}

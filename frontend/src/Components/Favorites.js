@@ -13,10 +13,15 @@ const Favorites = () => {
                     user.favs.map((robot) => {
                         return (<div key={robot._id}>
                             <div className="card col-md-4 mt-5 mx-auto text-white bg-dark" style={{ width: '30rem' }}>
-                                <Carousel autoPlay={true} infiniteLoop stopOnHover={true}>
+                                <Carousel
+                                    autoPlay
+                                    infiniteLoop
+                                    stopOnHover
+                                    renderThumbs={() => { return robot.img.map((url, index) => { return <img key={index} src={url} /> }) }}
+                                >
                                     {robot.img.map((url, index) => (
                                         <div key={index}>
-                                            <img src={url} className="card-img-top d-block" alt="..." />
+                                            <img src={url} className="photo card-img-top d-block" alt="..." />
                                         </div>
                                     ))}
                                 </Carousel>
