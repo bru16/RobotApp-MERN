@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import Loading from './Loading'
 import { useAuth } from "../context/authContext";
@@ -6,11 +6,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import ReactPlayer from 'react-player'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faBackspace, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import EditModal from './EditModal'
+import { toast } from "react-toastify";
 
 const SingleRobot = ({ token }) => {
+    const history = useHistory();
     const { id } = useParams(); //get the exact robot to render
     const axios = require('axios').default;
     const userSession = useAuth();
@@ -42,6 +44,15 @@ const SingleRobot = ({ token }) => {
 
     const handleFavorite = () => {
         userSession.handleFavorite(id, robot, isItFaved); // if isItFaved then delete, else add it.
+    }
+    const handleDelete = () => {
+        userSession.deleteRobot(robot)
+            .then(() => {
+                userSession.getFavs();
+                toast.info("Robot deleted successfully!");
+                history.push('/home');
+            })
+            .catch(() => toast.error("An error has occurred"))
     }
 
     return (
@@ -75,7 +86,10 @@ const SingleRobot = ({ token }) => {
                             <p className="card-text">{robot.description}</p>
                         </div>
                         <div className="mb-3 mx-auto">
-                            {isItModerator ? <EditModal {...robot} /> : <div></div>}
+                            {isItModerator ? <div>
+                                <EditModal {...robot} />
+                                <button className="btn" onClick={handleDelete} style={{ color: "darkgoldenrod" }}><FontAwesomeIcon icon={faBackspace} />  DELETE</button>
+                            </div> : <div></div>}
                         </div>
                     </div>
                 </div >

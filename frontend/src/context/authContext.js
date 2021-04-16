@@ -110,6 +110,15 @@ function useProvideAuth() {
         }).catch(err => console.log(err));
     }
 
+    const deleteRobot = async (robot) => {
+        console.log(user.token)
+        return axios.delete(`${API_URL}products/${robot._id}`, {
+            headers: {
+                "x-access-token": user.token
+            }
+        }).catch(err => console.log(err));
+    }
+
     // Return the user object and auth methods
     return {
         favs,
@@ -123,7 +132,8 @@ function useProvideAuth() {
         handleFavorite,
         editRobot,
         getFavs,
-        createRobot
+        createRobot,
+        deleteRobot
     };
 }
 
