@@ -1,4 +1,6 @@
 import Product from '../models/Product'
+import fs from 'fs'
+import path from 'path'
 
 export const createProduct = async (req, res) => {
     console.log(req.files);
@@ -6,7 +8,7 @@ export const createProduct = async (req, res) => {
     const name = req.body.robot[0];
     const description = req.body.robot[1];
     const video = req.body.robot[2];
-    console.log(name, description, img,video);
+    console.log(name, description, img, video);
 
     const robot = new Product({
         name,
@@ -37,6 +39,16 @@ export const updateProductById = async (req, res) => {
 }
 
 export const deleteProductById = async (req, res) => {
+    const robot = await Product.findById(req.params.productId);
+    const images = robot.img;
     await Product.findByIdAndDelete(req.params.productId);
+    var imagesPath = path.join(__dirname, '../../uploads/');   // path where images are stored.
+    images.forEach(img => {
+        var temporaryPath = imagesPath.concat(img.replace('http://localhost:4000/uploads\\', ""));  //change
+        fs.unlink(temporaryPath, (err) => {
+            (err) ? console.log(err) : console.log('image deleted successfully')
+        })
+    });
+
     res.status(204).json();
 }
