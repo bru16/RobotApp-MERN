@@ -60,10 +60,10 @@ const SingleRobot = ({ token }) => {
             :
             <div className='container-fluid'>
                 <div className='row'>
-                    <div className="col-sm-8 mx-auto mt-5">
+                    <div className="col-md-8">
                         <ReactPlayer url={robot.video} playing width='100%' height='100%' controls />
                     </div>
-                    <div className="card col-md-4 mt-5 mx-auto text-white bg-dark" style={{ width: '30rem' }}>
+                    <div className="mt-5 mt-md-0 card col-md-3 mx-auto text-white bg-dark px-0" >
                         <Carousel
                             autoPlay
                             infiniteLoop
@@ -71,7 +71,7 @@ const SingleRobot = ({ token }) => {
                             stopOnHover
                             showIndicators={false}>
                             {robot.img.map((url, index) => (
-                                <img key={index} src={url} className="photo card-img-top d-block" alt="..." />
+                                <img key={index} src={url} className="card-img-top d-block" alt="..." />
                             ))}
                         </Carousel>
                         <div className="card-body">
