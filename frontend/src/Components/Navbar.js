@@ -22,7 +22,7 @@ const Navbar = () => {
                     </li> : <div></div>}
                 </ul>
             </div>
-            <Link to="/"><button type="button" className="btn btn-dark btn-outline-secondary btn-space" onClick={auth.logout}>Log Out</button></Link>
+            <Link to="/"><button type="button" className="btn btn-dark btn-space" onClick={auth.logout}>Log Out</button></Link>
         </nav> :
             <div> </div>
     );

@@ -74,7 +74,7 @@ const SingleRobot = ({ token }) => {
                                 <img key={index} src={url} className="card-img-top d-block" alt="..." />
                             ))}
                         </Carousel>
-                        <div className="card-body">
+                        <div className="card-body text-center">
                             <h5 className="card-title">{robot.name}
                                 {isItFaved ? (
                                     <button className='btn' style={{ color: "yellow" }} onClick={handleFavorite}><FontAwesomeIcon icon={faStar} /> Favorite</button>

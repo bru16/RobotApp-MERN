@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle, faRobot } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -21,10 +21,10 @@ const Robots = ({ robot }) => {
                                     <img key={index} src={url} className="img-fluid card-img-top d-block" alt="..." />
                                 ))}
                             </Carousel>
-                            <div className="card-body">
-                                <h5 className="card-title">{r.name}</h5>
+                            <div className="card-body text-center">
+                                <h5 className="card-title"><FontAwesomeIcon icon={faRobot} color="orange"/> {r.name}</h5>
                                 <p className="card-text">{r.description}</p>
-                                <Link to={`robot/${r._id}`}><button type="button" className="btn btn-dark btn-outline-secondary" >More Info    <FontAwesomeIcon icon={faInfoCircle} /></button></Link>
+                                <Link to={`robot/${r._id}`}><button type="button" className="btn btn-dark" >More Info    <FontAwesomeIcon icon={faInfoCircle} /></button></Link>
                             </div>
                         </div>
                     </div >

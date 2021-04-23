@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from '../../context/authContext'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-
+import ParticlesBg from 'particles-bg';
 
 const SignupForm = () => {
     const auth = useAuth();
@@ -53,9 +53,9 @@ const SignupForm = () => {
     return (
         <div>
             <div className="mt-5 m-4">
-                <Link to="/"><button type="button" className="btn btn-dark btn-outline-secondary" ><FontAwesomeIcon icon={faReply} /> Go back</button></Link>
+                <Link to="/"><button type="button" className="btn btn-dark" ><FontAwesomeIcon icon={faReply} /> Go back</button></Link>
             </div>
-            <div className="col-md-2 mx-auto mt-5 container">
+            <div className="container col-md-2 mx-auto mt-5">
                 <Formik initialValues={{
                     username: '',
                     password: '',
@@ -93,14 +93,15 @@ const SignupForm = () => {
                                         <option value="admin">admin</option>
                                     </Field>
                                 </div>
-                                <div className="mt-4">
-                                    <button type="submit" className="btn btn-dark btn-outline-secondary btn-space" >Submit</button>
+                                <div className="mt-4 text-end">
+                                    <button type="submit" className="btn btn btn-dark btn-space" >Submit</button>
                                 </div>
                             </div>
                         </Form>
                     )}
                 </Formik>
             </div>
+            <ParticlesBg type="tadpole" num={10} bg={true} />
         </div>
     )
 }
