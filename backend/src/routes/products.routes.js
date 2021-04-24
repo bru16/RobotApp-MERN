@@ -6,8 +6,8 @@ const router = Router();
 
 router.get('/', [authJwt.verifyToken], productsCtrl.getProducts);
 
-router.post('/new', [authJwt.verifyToken, authJwt.isAdmin, upload.array('file')], productsCtrl.createProduct);   //antes de crear el product Verifico mediante middlewares si 
-//existe un token y si el user es moderator
+router.post('/new', [authJwt.verifyToken, authJwt.isAdmin, upload.array('file')], productsCtrl.createProduct);
+
 router.get('/:productId', [authJwt.verifyToken], productsCtrl.getProductById);
 
 router.put('/:productId', [authJwt.verifyToken, authJwt.isModerator], productsCtrl.updateProductById);
