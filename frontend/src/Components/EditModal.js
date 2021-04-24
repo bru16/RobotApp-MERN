@@ -3,12 +3,10 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from '../context/authContext'
-import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
 const EditModal = ({ name, _id }) => {
-    const history = useHistory();
     const user = useAuth();
     const customStyles = {
         overlay:
@@ -36,13 +34,7 @@ const EditModal = ({ name, _id }) => {
             toast.error('Name and Description cannot be blank');
             return;
         }
-        user.editRobot({ robotName, robotDescription, _id })
-            .then(() => {
-                user.getFavs(); // update favorite robots array in user. (context)
-                history.push('/home')
-                toast.info("Edited Successfully!")
-            })
-            .catch(() => toast.error('An error has occurred'));
+        user.editRobot({ robotName, robotDescription, _id });
     }
 
     return (

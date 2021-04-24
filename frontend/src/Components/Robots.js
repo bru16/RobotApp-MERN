@@ -22,7 +22,7 @@ const Robots = ({ robot }) => {
                                 ))}
                             </Carousel>
                             <div className="card-body text-center">
-                                <h5 className="card-title"><FontAwesomeIcon icon={faRobot} color="orange"/> {r.name}</h5>
+                                <h5 className="card-title"><FontAwesomeIcon icon={faRobot} color="orange" /> {r.name}</h5>
                                 <p className="card-text">{r.description}</p>
                                 <Link to={`robot/${r._id}`}><button type="button" className="btn btn-dark" >More Info    <FontAwesomeIcon icon={faInfoCircle} /></button></Link>
                             </div>

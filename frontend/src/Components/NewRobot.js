@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/authContext'
-import { useHistory } from "react-router-dom";
 import Loading from './Loading';
 
-
 const NewRobot = () => {
-    const history = useHistory();
     const auth = useAuth();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -29,15 +26,7 @@ const NewRobot = () => {
         data.append('robot', name);
         data.append('robot', description);
         data.append('robot', video);
-        auth.createRobot(data)
-            .then(() => {
-                toast.info('Robot created successfully');
-                history.push('/home');
-            })
-            .catch(() => {
-                setIsBeingCreated(false);
-                toast.error('An error has occurred');
-            });
+        auth.createRobot(data).then(() => setIsBeingCreated(false));
     }
 
     const handleFiles = e => {
@@ -46,7 +35,7 @@ const NewRobot = () => {
 
     if (isBeingCreated) return <Loading />
     return (
-        <div className="container" style={{ width: '500px' }} >
+        <div className="container col-md-4 mx-auto">
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <h3>Name</h3>

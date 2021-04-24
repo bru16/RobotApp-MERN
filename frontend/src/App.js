@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import Navbar from './Components/Navbar'
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Home from './Components/Home'
 import LandingPage from './Components/LandingPage';
 import LoginForm from './Components/auth/LoginForm';
@@ -24,19 +24,17 @@ function App() {
 
   return (
     <div>
-      <Router>
-        {auth.user ? <Navbar /> : <Redirect to="/" />}
-        <Switch>
-          <Route exact path="/" component={() => <LandingPage user={auth.user} />} />
-          <Route path="/login" component={() => (auth.user ? <Redirect to="/home" /> : <LoginForm />)} />
-          <Route path="/signup" component={() => (auth.user ? <Redirect to="/home" /> : <SignupForm />)} />
-          <Route path="/home" component={() => (auth.user ? <Home token={auth.user.token} /> : <Redirect to="/login" />)} />
-          <Route path="/robot/:id" component={() => (auth.user ? <SingleRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
-          <Route path="/favorite" component={() => (auth.user ? <Favorites /> : <Redirect to="/login" />)} />
-          <Route path="/new" component={() => (auth.user ? <NewRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
-          <Route path="/load" component={Loading} />
-        </Switch>
-      </Router>
+      {auth.user ? <Navbar /> : <Redirect to="/" />}
+      <Switch>
+        <Route exact path="/" component={() => <LandingPage user={auth.user} />} />
+        <Route path="/login" component={() => (auth.user ? <Redirect to="/home" /> : <LoginForm />)} />
+        <Route path="/signup" component={() => (auth.user ? <Redirect to="/home" /> : <SignupForm />)} />
+        <Route path="/home" component={() => (auth.user ? <Home token={auth.user.token} /> : <Redirect to="/login" />)} />
+        <Route path="/robot/:id" component={() => (auth.user ? <SingleRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
+        <Route path="/favorite" component={() => (auth.user ? <Favorites /> : <Redirect to="/login" />)} />
+        <Route path="/new" component={() => (auth.user ? <NewRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
+        <Route path="/load" component={Loading} />
+      </Switch>
     </div>
   );
 }

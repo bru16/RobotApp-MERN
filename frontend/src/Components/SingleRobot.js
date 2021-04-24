@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import Loading from './Loading'
 import { useAuth } from "../context/authContext";
@@ -9,10 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import EditModal from './EditModal'
-import { toast } from "react-toastify";
 
 const SingleRobot = ({ token }) => {
-    const history = useHistory();
     const { id } = useParams(); //get the exact robot to render
     const axios = require('axios').default;
     const userSession = useAuth();
@@ -43,16 +41,10 @@ const SingleRobot = ({ token }) => {
     }
 
     const handleFavorite = () => {
-        userSession.handleFavorite(id, robot, isItFaved); // if isItFaved then delete, else add it.
+        userSession.handleFavorite(id, robot, isItFaved); // if isItFaved then delete (no longer favorite), else add it.
     }
     const handleDelete = () => {
-        userSession.deleteRobot(robot)
-            .then(() => {
-                userSession.getFavs();
-                toast.info("Robot deleted successfully!");
-                history.push('/home');
-            })
-            .catch(() => toast.error("An error has occurred"))
+        userSession.deleteRobot(robot);
     }
 
     return (

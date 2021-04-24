@@ -1,4 +1,6 @@
 import React, { useState, useContext, createContext, useEffect, } from 'react';
+import { Redirect, useHistory } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const authContext = createContext();
 const API_URL = "http://localhost:4000/api/";
@@ -8,7 +10,7 @@ function useProvideAuth() {
     const [user, setUser] = useState(null);
     const [favs, setFavs] = useState([]);
     const [timeToLogOut, setTimeToLogOut] = useState(null);
-
+    const history = useHistory();
     useEffect(() => {
         const loggedInUser = getCurrentUser()
         if (loggedInUser) {
@@ -44,7 +46,12 @@ function useProvideAuth() {
             email,
             password,
             roles
-        });
+        }).then(() => {
+            toast.success("Signed Up Successfully!");
+            history.push("/login");
+        }).catch(() => {
+            toast.error("User already exists, try again.");
+        })
     };
 
     const logout = () => {
@@ -81,7 +88,7 @@ function useProvideAuth() {
                 }
             }).then((res) => {
                 setFavs(res.data.favoriteRobots);
-            }).catch((err) => console.log(err))
+            }).catch(() => toast.error('An error has occurred'));
         }
         else (
             axios.put(`${API_URL}user/${id}`, { robot }, {
@@ -94,12 +101,17 @@ function useProvideAuth() {
         )
     }
 
-    const editRobot = ({ robotName, robotDescription, _id }) => {
+    const editRobot = async ({ robotName, robotDescription, _id }) => {
         return axios.put(`${API_URL}products/${_id}`, { robotName, robotDescription, _id }, {
             headers: {
                 "x-access-token": user.token,
             },
-        }).catch(err => console.log(err));
+        }).then(() => {
+            getFavs();
+            history.push('/home');
+            toast.info("Edited Successfully!");
+        })
+            .catch(() => toast.error('An error has occurred'));
     }
 
     const createRobot = async (data) => {
@@ -107,16 +119,26 @@ function useProvideAuth() {
             headers: {
                 "x-access-token": user.token
             },
-        }).catch(err => console.log(err));
+        }).then(() => {
+            history.push('/home');
+            toast.info('Robot created successfully');
+        })
+            .catch(() => {
+                toast.error('An error has occurred')
+            });
     }
 
     const deleteRobot = async (robot) => {
-        console.log(user.token)
         return axios.delete(`${API_URL}products/${robot._id}`, {
             headers: {
                 "x-access-token": user.token
             }
-        }).catch(err => console.log(err));
+        }).then(() => {
+            getFavs();
+            toast.info("Robot deleted successfully!");
+            history.push("/home");
+        })
+            .catch(() => toast.error("An error has occurred"));
     }
 
     // Return the user object and auth methods
