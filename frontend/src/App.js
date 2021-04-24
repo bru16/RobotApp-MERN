@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import { useAuth } from './context/authContext'
 import SingleRobot from './Components/SingleRobot'
 import Favorites from './Components/Favorites'
-import Loading from './Components/Loading';
 import NewRobot from './Components/NewRobot'
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
         <Route path="/robot/:id" component={() => (auth.user ? <SingleRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
         <Route path="/favorite" component={() => (auth.user ? <Favorites /> : <Redirect to="/login" />)} />
         <Route path="/new" component={() => (auth.user ? <NewRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
-        <Route path="/load" component={Loading} />
       </Switch>
     </div>
   );
