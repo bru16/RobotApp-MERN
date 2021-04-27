@@ -3,12 +3,11 @@ import fs from 'fs'
 import path from 'path'
 
 export const createProduct = async (req, res) => {
-    console.log(req.files);
+    if (!req.files) return res.status(403).json({ message: "files not found" });
     const img = req.files.map(image => { return `http://localhost:4000/${image.path}` });   //change
     const name = req.body.robot[0];
     const description = req.body.robot[1];
     const video = req.body.robot[2];
-    console.log(name, description, img, video);
 
     const robot = new Product({
         name,
@@ -28,7 +27,7 @@ export const getProducts = async (req, res) => {
 
 export const getProductById = async (req, res) => {
     const product = await Product.findById(req.params.productId);
-    res.json(product);
+    res.json(product).status(200);
 }
 
 export const updateProductById = async (req, res) => {
@@ -49,6 +48,5 @@ export const deleteProductById = async (req, res) => {
             (err) ? console.log(err) : console.log('image deleted successfully')
         })
     });
-
     res.status(204).json();
 }

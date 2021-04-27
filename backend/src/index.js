@@ -1,6 +1,10 @@
 import app from './app'
 import './database' // mongo database
 
-app.listen(4000);
+const PORT = process.env.PORT || 4001;
 
-console.log(`Server listening on port 4000`);
+export const server = app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+
+
+// I export const server to close it when testing.
+

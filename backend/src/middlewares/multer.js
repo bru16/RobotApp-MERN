@@ -1,4 +1,3 @@
-import { json } from 'express';
 import multer from 'multer'
 //Middleware to handle files upload
 

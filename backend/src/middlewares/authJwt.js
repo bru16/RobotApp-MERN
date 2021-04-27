@@ -6,9 +6,6 @@ import Role from '../models/Role'
 export const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers["x-access-token"];
-
-        console.log(token);
-
         if (!token) return res.status(403).json({ message: 'No token provided' });
         const decoded = jwt.verify(token, config.SECRET);
         req.userId = decoded.id;        // las siguientes funciones tienen acceso al ID del user.

@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.routes';
 import { createRoles } from './libs/initialSetup'
 import userRoutes from './routes/user.routes'
 import cors from 'cors'
+require('dotenv').config();
 
 const app = express();
 createRoles();
