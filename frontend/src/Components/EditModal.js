@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
 const EditModal = ({ name, _id }) => {
-    const user = useAuth();
+    const { editRobot } = useAuth();
     const customStyles = {
         overlay:
         {
@@ -34,7 +34,7 @@ const EditModal = ({ name, _id }) => {
             toast.error('Name and Description cannot be blank');
             return;
         }
-        user.editRobot({ robotName, robotDescription, _id });
+        editRobot({ robotName, robotDescription, _id });
     }
 
     return (

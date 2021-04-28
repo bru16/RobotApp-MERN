@@ -1,10 +1,10 @@
 import React, { useState, useContext, createContext, useEffect, } from 'react';
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
+import axios from 'axios'
 
 const authContext = createContext();
 const API_URL = "http://localhost:4000/api/";
-const axios = require('axios').default;
 
 function useProvideAuth() {
     const [user, setUser] = useState(null);
@@ -35,8 +35,10 @@ function useProvideAuth() {
             const expiryDate = Date.now() + 7200000; //2 hrs
             localStorage.setItem('expiryDate', JSON.stringify(expiryDate));
             autoLogout(7200000);
+            toast.success("Logged In Successfully!");
+            history.push("/home");  // redirect to user's home
         }).catch(() => {
-            return false
+            toast.error("Email and Password do not match, please try again.");
         })
     };
 

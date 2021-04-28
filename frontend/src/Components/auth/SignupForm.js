@@ -1,23 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReply } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
-import { useHistory } from "react-router-dom";
 import { useAuth } from '../../context/authContext'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ParticlesBg from 'particles-bg';
 
 const SignupForm = () => {
-    const auth = useAuth();
-    const history = useHistory();
+    const { register } = useAuth();
 
     const handleSubmit = async (values) => {
         const roles = ['user'];
         if (values.role === 'moderator') roles.push('moderator');
         if (values.role === 'admin') roles.push('moderator', 'admin');
-
-        auth.register(values.username, values.email, values.password, roles);
+        register(values.username, values.email, values.password, roles);
     }
 
     const SignupSchema = Yup.object().shape({

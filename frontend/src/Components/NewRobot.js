@@ -4,7 +4,7 @@ import { useAuth } from '../context/authContext'
 import Loading from './Loading';
 
 const NewRobot = () => {
-    const auth = useAuth();
+    const { createRobot } = useAuth();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
@@ -26,7 +26,7 @@ const NewRobot = () => {
         data.append('robot', name);
         data.append('robot', description);
         data.append('robot', video);
-        auth.createRobot(data).then(() => setIsBeingCreated(false));
+        createRobot(data).then(() => setIsBeingCreated(false));
     }
 
     const handleFiles = e => {

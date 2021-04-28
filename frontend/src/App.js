@@ -14,6 +14,7 @@ import NewRobot from './Components/NewRobot'
 function App() {
   const auth = useAuth(); //useContext
   toast.configure() // for notifications
+
   useEffect(() => {
     const expiryDate = localStorage.getItem('expiryDate');
     if (expiryDate && (Date.now() >= expiryDate)) {
@@ -31,7 +32,7 @@ function App() {
         <Route path="/home" component={() => (auth.user ? <Home token={auth.user.token} /> : <Redirect to="/login" />)} />
         <Route path="/robot/:id" component={() => (auth.user ? <SingleRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
         <Route path="/favorite" component={() => (auth.user ? <Favorites /> : <Redirect to="/login" />)} />
-        <Route path="/new" component={() => (auth.user ? <NewRobot token={auth.user.token} /> : <Redirect to="/login" />)} />
+        <Route path="/new" component={() => (auth.user ? <NewRobot /> : <Redirect to="/login" />)} />
       </Switch>
     </div>
   );

@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { useHistory } from "react-router-dom";
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReply } from '@fortawesome/free-solid-svg-icons'
@@ -8,25 +6,14 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../../context/authContext'
 import ParticlesBg from 'particles-bg';
 
-
 const LoginForm = () => {
-    const auth = useAuth();
+    const { login } = useAuth();
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    const history = useHistory();
 
     const handleSubmit = async e => {
         e.preventDefault();
-        auth.login(email, password)
-            .then((res) => {
-                if (res !== false) {
-                    toast.success("Logged In Successfully!");
-                    history.push("/home");  // redirect to user's home
-                }
-                else {
-                    toast.error("Email and Password do not match, please try again.");
-                }
-            });
+        login(email, password);
     }
 
     return (
