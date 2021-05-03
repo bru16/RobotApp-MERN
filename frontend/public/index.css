@@ -1,79 +1,79 @@
-body{
-    background-color: #111013;
+body {
+  background-color: #111013;
 }
 .jumbotron-fluid {
-    color: rgb(107, 37, 37);
-    position: relative;
-    height: 40vh;
+  color: rgb(107, 37, 37);
+  position: relative;
+  height: 40vh;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .btn {
-    color:rgb(107, 37, 37);
+  color: rgb(107, 37, 37);
 }
 
 .btn-space {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
-.navbar-brand{
-    color:rgb(107, 37, 37);
+.navbar-brand {
+  color: rgb(107, 37, 37);
 }
 
-.nav-link{
-    color:rgb(107, 37, 37);
+.nav-link {
+  color: rgb(107, 37, 37);
 }
 
-a:hover{
-    color:cornsilk
+a:hover {
+  color: cornsilk;
 }
 
-.card-to-right{
-        margin-right: 25px;
-        margin-left: auto!important;
-        margin-top: 30px;
+.card-to-right {
+  margin-right: 25px;
+  margin-left: auto !important;
+  margin-top: 30px;
 }
 
 .player-wrapper {
-    width: auto;
-    height: auto; 
-  }
+  width: auto;
+  height: auto;
+}
 .react-player {
-    padding-top: 56.25%;
-    position: relative;
-  }
-  
+  padding-top: 56.25%;
+  position: relative;
+}
+
 .react-player > div {
-    position: absolute;
-  }
+  position: absolute;
+}
 
 .btn-rightEnd {
-    float: right;
+  float: right;
 }
 
-.color{
-    color:rgb(107, 37, 37);
+.color {
+  color: rgb(107, 37, 37);
 }
 
-.center{
-    margin-top: 350px;
-    margin-right: 40px;
+.center {
+  margin-top: 350px;
+  margin-right: 40px;
 }
 
 .center-loading {
-    padding-top: 350px;
-    padding-left: 600px;
+  padding-top: 350px;
+  padding-left: 600px;
 }
-h3{
-    color: rgb(209, 203, 207);
-}
-
-.formError{
-    color: rgb(197, 38, 32);
+h3 {
+  color: rgb(209, 203, 207);
 }
 
-h2{ 
-    color: grey;
+.formError {
+  color: rgb(197, 38, 32);
+}
+
+h2 {
+  color: grey;
 }

@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
-import Loading from './Loading'
-import { useAuth } from "../context/authContext";
+import Loading from '../Loading'
+import { useAuth } from "../../context/authContext";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import ReactPlayer from 'react-player'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import EditModal from './EditModal'
-import useRobots from "./customHooks/useRobots";
+import EditModal from '../EditModal'
+import useRobots from "../customHooks/useRobots";
 
 const SingleRobot = ({ token }) => {
     const { id } = useParams(); //get the exact robot to render
@@ -18,7 +18,7 @@ const SingleRobot = ({ token }) => {
     const isItModerator = userSession.user.userFound.roles.some(role => role.name === 'moderator');
 
     const handleFavorite = () => {
-        userSession.handleFavorite(id, robot, isItFaved); // if isItFaved then delete (no longer favorite), else add it.
+        userSession.handleFavorite({ id, robot, isItFaved }); // if isItFaved then delete (no longer favorite), else add it.
     }
     const handleDelete = () => {
         userSession.deleteRobot(robot);

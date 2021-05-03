@@ -7,9 +7,9 @@ import LoginForm from './Components/auth/LoginForm';
 import SignupForm from './Components/auth/SignupForm';
 import { toast } from 'react-toastify';
 import { useAuth } from './context/authContext'
-import SingleRobot from './Components/SingleRobot'
-import Favorites from './Components/Favorites'
-import NewRobot from './Components/NewRobot'
+import SingleRobot from './Components/Robots/SingleRobot'
+import Favorites from './Components/user/Favorites'
+import NewRobot from './Components/Robots/NewRobot'
 
 function App() {
   const auth = useAuth(); //useContext

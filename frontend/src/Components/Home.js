@@ -1,4 +1,4 @@
-import Robots from './Robots'
+import Robots from './Robots/Robots'
 import useRobots from './customHooks/useRobots'
 import Loading from './Loading'
 

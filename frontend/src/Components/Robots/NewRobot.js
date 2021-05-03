@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify';
-import { useAuth } from '../context/authContext'
-import Loading from './Loading';
+import { useAuth } from '../../context/authContext'
+import Loading from '../Loading';
 
 const NewRobot = () => {
     const { createRobot } = useAuth();
@@ -12,7 +12,7 @@ const NewRobot = () => {
     const [isBeingCreated, setIsBeingCreated] = useState(false);
     const urlVideo = 'https://www.youtube.com/watch?v='
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         if (!name.replace(/\s/g, '').length || !description.replace(/\s/g, '').length || !video.replace(/\s/g, '').length) return toast.error('Name, Description and video cannot be blank');
         if (!video.includes(urlVideo)) return toast.error('Video must be from youtube and must exist');
@@ -26,7 +26,8 @@ const NewRobot = () => {
         data.append('robot', name);
         data.append('robot', description);
         data.append('robot', video);
-        createRobot(data).then(() => setIsBeingCreated(false));
+        await createRobot(data);    // wait for the creation while displaying a loading
+        setIsBeingCreated(false);
     }
 
     const handleFiles = e => {

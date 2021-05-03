@@ -2,6 +2,8 @@ import React, { useState, useContext, createContext, useEffect, } from 'react';
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from 'axios'
+import * as robotService from '../services/robots'
+import * as userService from '../services/user'
 
 const authContext = createContext();
 const API_URL = "http://localhost:4000/api/";
@@ -72,75 +74,80 @@ function useProvideAuth() {
         return JSON.parse(localStorage.getItem("user"));
     };
 
-    const getFavs = () => {
-        axios.get(`${API_URL}user/`, {
-            headers: {
-                "x-access-token": user.token
-            }
-        }).then((res) => {
-            setFavs(res.data);
-        });
+    const getFavs = async () => {
+        const token = user.token;
+        try {
+            const data = await userService.getRobots(token);
+            setFavs(data);
+        } catch (error) {
+            toast.error('An error has occurred');
+        }
     }
 
-    const handleFavorite = (id, robot, isFaved) => {
-        if (isFaved === true) {
-            axios.delete(`${API_URL}user/${id}`, {
-                headers: {
-                    "x-access-token": user.token
-                }
-            }).then((res) => {
-                setFavs(res.data.favoriteRobots);
-            }).catch(() => toast.error('An error has occurred'));
+    const deleteFavorite = async (id) => {
+        try {
+            const token = user.token;
+            const data = await userService.deleteFavorite({ id, token });
+            setFavs(data.favoriteRobots);
+        } catch (error) {
+            toast.error("An error has occurred");
         }
-        else (
-            axios.put(`${API_URL}user/${id}`, { robot }, {
-                headers: {
-                    "x-access-token": user.token
-                }
-            }).then((res) => {
-                setFavs(res.data.favoriteRobots);
-            })
-        )
+    }
+
+    const handleFavorite = async ({ id, robot, isItFaved }) => {
+        const token = user.token;
+        console.log(robot)
+        if (isItFaved === true) {
+            try {
+                const data = await userService.deleteFavorite({ id, token });
+                setFavs(data.favoriteRobots);
+            } catch (error) {
+                toast.error('An error has occurred');
+            }
+        }
+        else {
+            try {
+                const data = await userService.addFavorite({ robot, token });
+                setFavs(data.favoriteRobots);
+            } catch (error) {
+                toast.error('An error has occurred');
+            }
+        }
     }
 
     const editRobot = async ({ robotName, robotDescription, _id }) => {
-        return axios.put(`${API_URL}products/${_id}`, { robotName, robotDescription, _id }, {
-            headers: {
-                "x-access-token": user.token,
-            },
-        }).then(() => {
+        try {
+            const token = user.token;
+            await robotService.editRobot({ robotName, robotDescription, token, _id });
             getFavs();
-            history.push('/home');
-            toast.info("Edited Successfully!");
-        })
-            .catch(() => toast.error('An error has occurred'));
+            history.push("/home");
+            toast.info("Robot edited successfully!");
+        } catch (error) {
+            toast.error('An error has occurred')
+        }
     }
 
-    const createRobot = async (data) => {
-        return axios.post(`${API_URL}products/new`, data, {
-            headers: {
-                "x-access-token": user.token
-            },
-        }).then(() => {
-            history.push('/home');
-            toast.info('Robot created successfully');
-        })
-            .catch(() => {
-                toast.error('An error has occurred')
-            });
+    const createRobot = async (robot) => {
+        try {
+            const token = user.token;
+            await robotService.createRobot({ robot, token });
+            toast.info('Robot created successfully!');
+            history.push("/home");
+        } catch (error) {
+            toast.error('An error has occurred');
+        }
     }
 
     const deleteRobot = async (robot) => {
-        return axios.delete(`${API_URL}products/${robot._id}`, {
-            headers: {
-                "x-access-token": user.token
-            }
-        }).then(() => {
+        try {
+            const token = user.token;
+            await robotService.deleteRobot({ robot, token });
             getFavs();
             toast.info("Robot deleted successfully!");
-            history.push("/home");
-        })
-            .catch(() => toast.error("An error has occurred"));
+            history.push('/home');
+        } catch (error) {
+            toast.error("An error has occurred");
+        }
     }
 
     // Return the user object and auth methods
@@ -157,7 +164,8 @@ function useProvideAuth() {
         editRobot,
         getFavs,
         createRobot,
-        deleteRobot
+        deleteRobot,
+        deleteFavorite
     };
 }
 
