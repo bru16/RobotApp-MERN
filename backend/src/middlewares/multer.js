@@ -3,7 +3,12 @@ import multer from 'multer'
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        if (process.env.NODE_ENV === 'test') {
+            cb(null, 'testUploads/')
+        }
+        else {
+            cb(null, 'uploads/');
+        }
     },
     filename: function (req, file, cb) {
         cb(null, new Date().toISOString().replace(/:|\./g, '') + '-' + file.originalname);  // save img name with today date.

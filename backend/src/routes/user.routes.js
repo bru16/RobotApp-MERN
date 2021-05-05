@@ -8,6 +8,6 @@ router.get('/', [authJwt.verifyToken], userCtrl.getFavorite);
 
 router.delete('/:robotId', [authJwt.verifyToken], userCtrl.deleteFavoriteRobot);
 
-router.put('/:robotId', [authJwt.verifyToken], userCtrl.addFavoriteRobot);
+router.put('/', [authJwt.verifyToken], userCtrl.addFavoriteRobot);
 
 export default router;
