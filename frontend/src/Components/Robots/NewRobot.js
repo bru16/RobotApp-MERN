@@ -37,7 +37,7 @@ const NewRobot = () => {
     if (isBeingCreated) return <Loading />
     return (
         <div className="container col-md-4 mx-auto">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-test-id="createNewRobotForm">
                 <div className="mb-3">
                     <h3>Name</h3>
                     <input type="text" className="form-control" placeholder="Please fill in the information" onChange={e => setName(e.target.value)} />
@@ -48,7 +48,7 @@ const NewRobot = () => {
                 </div>
                 <div className="mb-3">
                     <h3>Video URL (youtube)</h3>
-                    <input className="form-control" placeholder="Please fill in the information" onChange={e => setVideo(e.target.value)} />
+                    <input name="url" className="form-control" placeholder="Please fill in the information" onChange={e => setVideo(e.target.value)} />
                 </div>
                 <div>
                     <h3>Images</h3>

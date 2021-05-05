@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace, faRobot } from "@fortawesome/free-solid-svg-icons";
 
 const Favorites = () => {
-  const user = useAuth();
-  return user.favs.length !== 0 ? (
+  const { favs, deleteFavorite } = useAuth();
+  return favs.length !== 0 ? (
     <div className="container">
-      {user.favs.map((robot) => {
+      {favs.map((robot) => {
         return (
           <div key={robot._id}>
             <div className="card mb-3 col-md-4 mx-auto text-white bg-dark">
@@ -36,7 +36,7 @@ const Favorites = () => {
                 <button
                   className="btn"
                   style={{ color: "darkgoldenrod" }}
-                  onClick={() => user.deleteFavorite(robot._id)}
+                  onClick={() => deleteFavorite(robot._id)}
                 >
                   <FontAwesomeIcon icon={faBackspace} /> DELETE
                 </button>
