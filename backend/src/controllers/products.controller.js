@@ -3,8 +3,10 @@ import fs from 'fs'
 import path from 'path'
 
 export const createProduct = async (req, res) => {
-    if (!req.files) return res.status(403).json({ message: "files not found" });
-    const img = req.files.map(image => { return `http://localhost:4000/${image.path}` });   //change
+    console.log(req.body)
+
+    if (!process.env.NODE_ENV === 'test' && !req.files) return res.status(403).json({ message: "files not found" });
+    const img = req.files?.map(image => { return `http://localhost:${process.env.PORT}/${image.path}` }) || ''  //change
     const name = req.body.robot[0];
     const description = req.body.robot[1];
     const video = req.body.robot[2];
@@ -43,7 +45,7 @@ export const deleteProductById = async (req, res) => {
     await Product.findByIdAndDelete(req.params.productId);
     var imagesPath = path.join(__dirname, '../../uploads/');   // path where images are stored.
     images.forEach(img => {
-        var temporaryPath = imagesPath.concat(img.replace('http://localhost:4000/uploads\\', ""));  //change
+        var temporaryPath = imagesPath.concat(img.replace(`http://localhost:${process.env.PORT}/uploads\\`, ""));  //change
         fs.unlink(temporaryPath, (err) => {
             (err) ? console.log(err) : console.log('image deleted successfully')
         })
