@@ -77,3 +77,8 @@ h3 {
 h2 {
   color: grey;
 }
+
+.form-input {
+  width: 350px;
+  border-color: paleturquoise;
+}

@@ -37,18 +37,28 @@ describe('Robot App', () => {
     });
 })
 
-describe('when logged in', () => {
+describe('when logged in (as admin)', () => {
     beforeEach(() => {
-        cy.login({ email: 'admin@admin.com', password: 'admin' })
+        cy.login({ email: 'admin@admin.com', password: 'admin' });
+        cy.createNewRobot({ name: 'Test Robot 1', description: 'Test description 1', url: 'https://www.youtube.com/watch?v=zPyg4N7bcHM' });
+        cy.createNewRobot({ name: 'Test Robot 2', description: 'Test description 2', url: 'https://www.youtube.com/watch?v=zPyg4N7bcHM' });
+        cy.createNewRobot({ name: 'Wow!', description: 'Nice!', url: 'https://www.youtube.com/watch?v=zPyg4N7bcHM' });
     });
 
-    it('can go to favorite robots when having none', () => {
+    it('user sees three robots on home page', () => {
+        cy.contains('Test Robot 1');
+        cy.contains('Test Robot 2');
+        cy.contains('Wow!');
+        cy.contains('Nice!');
+    })
+
+    it('user can go to favorite robots when having none', () => {
         cy.contains('My Favorites');
         cy.get('[data-test-id="favoriteRobotsUser"]').click();
         cy.contains('No favorites Robots found, try adding one!');
     });
 
-    it('can create a new Robot correctly', () => {
+    it('user can create a new Robot correctly', () => {
         cy.contains('Add a robot!').click();
         cy.get('input').first().type('Hello');
         cy.get('textarea').type('This is a test from cypress :)');
@@ -62,7 +72,7 @@ describe('when logged in', () => {
         cy.contains('This is a test from cypress :)');
     });
 
-    it('add robot to favorite and checks if is it faved', () => {
+    it('user add robot to favorite and checks if is it faved', () => {
         cy.contains('More Info').click();
         cy.contains('Hello');
         cy.contains('This is a test from cypress :)');
